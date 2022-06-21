@@ -2,7 +2,7 @@
  * Audio.cpp
  *
  *  Created on: Oct 26.2018
- * 
+ *
  *  Version 2.0.3
  *  Updated on: Jun 20.2022
  *      Author: Wolle (schreibfaul1)
@@ -564,6 +564,10 @@ bool Audio::connecttohost(const char* host, const char* user, const char* pwd) {
         uint32_t dt = millis() - t;
         AUDIO_INFO(sprintf(chbuf, "%s has been established in %u ms, free Heap: %u bytes", m_f_ssl?"SSL":"Connection", dt, ESP.getFreeHeap());)
         strcpy(m_lastHost, l_host);
+
+        // gh - reset
+        setI2SCommFMT_LSB(false);
+
         m_f_running = true;
         if(hostwoext) {free(hostwoext); hostwoext = NULL;}
         if(extension) {free(extension); extension = NULL;}
